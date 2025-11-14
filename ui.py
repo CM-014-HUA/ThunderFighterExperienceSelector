@@ -80,14 +80,16 @@ class UserInterface:
         return used_items
 
     def confirm_upgrade(self, used_items):
-        """确认升级操作"""
+        """确认升级操作，支持直接回车默认确认"""
         if not used_items:
             return False
 
-        upgrade_choice = input("\n是否按照此方案升级? (y/n): ").lower()
-        return upgrade_choice == 'y'
+        upgrade_choice = input("\n是否按照此方案升级? (Y/n): ").strip().lower()
+        # 直接回车、输入y、yes都视为确认升级
+        return upgrade_choice in ['', 'y', 'yes']
 
     def ask_continue(self):
-        """询问是否继续"""
-        continue_choice = input("\n是否继续计算? (y/n): ").lower()
-        return continue_choice == 'y'
+        """询问是否继续，支持直接回车默认继续"""
+        continue_choice = input("\n是否继续计算? (Y/n): ").strip().lower()
+        # 直接回车、输入y、yes都视为继续
+        return continue_choice in ['', 'y', 'yes']

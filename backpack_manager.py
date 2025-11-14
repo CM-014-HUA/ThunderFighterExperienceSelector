@@ -75,7 +75,7 @@ class BackpackManager:
         # 可选：显示背包中所有物品的详细信息（按经验值排序）
         print("背包中的经验块（按经验值从大到小）:\n")
         for (exp, count), desc in zip(blocks, descriptions):
-            print(f"  {count} 个 {desc}(单个经验: {exp})")
+            print(f"  {count} 个\t {desc}(单个经验: {exp})")
 
         return blocks, descriptions
 
