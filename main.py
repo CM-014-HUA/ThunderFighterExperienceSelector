@@ -48,11 +48,10 @@ def main():
                 print("升级失败!")
         else:
             print("已取消升级，背包数据未更改。")
-
-        # 询问是否继续
-        if not ui.ask_continue():
-            print("\n感谢使用雷霆战机经验值优化系统!")
-            break
+            # 询问是否继续
+            if not ui.ask_continue():
+                print("\n感谢使用雷霆战机经验值优化系统!")
+                break
 
 
 if __name__ == "__main__":
