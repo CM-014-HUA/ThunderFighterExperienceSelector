@@ -43,9 +43,9 @@ def main():
         # 确认并执行升级
         if used_items and ui.confirm_upgrade(used_items):
             if backpack_manager.update_backpack(used_items):
-                print("升级完成!")
+                print("升级完成!\n")
             else:
-                print("升级失败!")
+                print("升级失败!\n")
         else:
             print("已取消升级，背包数据未更改。")
             # 询问是否继续

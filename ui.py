@@ -84,7 +84,7 @@ class UserInterface:
         if not used_items:
             return False
 
-        upgrade_choice = input("\n是否按照此方案升级? (Y/n): ").strip().lower()
+        upgrade_choice = input("\n是否按照此方案升级并继续下一次升级? (Y/n): ").strip().lower()
         # 直接回车、输入y、yes都视为确认升级
         return upgrade_choice in ['', 'y', 'yes']
 
