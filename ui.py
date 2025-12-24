@@ -36,7 +36,8 @@ class UserInterface:
             print("\n无法找到合适的经验块组合来满足升级需求")
             return None
 
-        print("\n经验块使用方案:")
+        print("\n经验块选择方案:")
+        print("=" * 60)
 
         # 收集使用的物品信息并按经验值排序
         used_blocks_info = []
@@ -63,7 +64,8 @@ class UserInterface:
                 print(f"  错误: {desc} 使用数量 {used_cnt} 超过背包数量 {available_cnt}!")
                 return None
 
-        print(f"\n验证: 使用经验块总经验值 = {total_used}")
+        print("=" * 60)
+        print(f"\n验证:\n使用经验块总经验值 = {total_used}")
 
         # 显示效率
         efficiency = (required_exp / total_used) * 100 if total_used > 0 else 0
