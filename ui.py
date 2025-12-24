@@ -72,7 +72,7 @@ class UserInterface:
         # 提供建议
         if min_waste == 0:
             print("\n完美! 没有经验浪费!")
-        elif min_waste < 100:
+        elif min_waste < 500:
             print(f"\n建议: 浪费的经验很少，只有 {min_waste}，可以直接升级")
         else:
             print(f"\n注意: 有 {min_waste} 经验被浪费，考虑寻找更合适的经验块组合")
