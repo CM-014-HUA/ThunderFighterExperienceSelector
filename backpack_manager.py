@@ -48,9 +48,11 @@ class BackpackManager:
         descriptions = []
 
         total_items = 0
+        exp_total_num = 0
         for description, count in self.backpack_data.items():
             if count > 0:
                 total_items += 1
+                exp_total_num += count
                 # 查找对应的经验值
                 exp_value = self._find_exp_value(description)
                 if exp_value:
@@ -70,7 +72,7 @@ class BackpackManager:
 
         # 显示背包总览
         total_exp = sum(exp * cnt for exp, cnt in blocks)
-        print(f"背包总览: 共 {total_items} 种经验块，总经验值: {total_exp}")
+        print(f"\n背包总览:\n共 {total_items} 种经验块，占用背包空间 {exp_total_num} 个，总经验值: {total_exp}")
 
         # 可选：显示背包中所有物品的详细信息（按经验值排序）
         print("背包中的经验块（按经验值从大到小）:\n")
