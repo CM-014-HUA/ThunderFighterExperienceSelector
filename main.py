@@ -1,8 +1,25 @@
 import os
+import sys
+import time
+import threading
 from config import BACKPACK_FILE
 from backpack_manager import BackpackManager
 from solver import ExpSolver
 from ui import UserInterface
+
+
+def loading_timer(stop_event):
+    """后台计时器线程函数，用于实时刷新控制台"""
+    start_time = time.time()
+    while not stop_event.is_set():
+        elapsed = time.time() - start_time
+        # 使用 \r (回车符) 让光标回到行首覆盖输出，实现同一行刷新
+        sys.stdout.write(f"\r正在优化解决方案... 已耗时: {elapsed:.1f} 秒")
+        sys.stdout.flush()
+        time.sleep(1)
+    # 计算完成后，清除当前行，为 UI 类的输出腾出干净空间
+    # sys.stdout.write("\r" + " " * 50 + "\r")
+    # sys.stdout.flush()
 
 
 def main():
@@ -32,10 +49,17 @@ def main():
         if required_exp is None:
             continue
 
-        print("正在优化解决方案...")
+        # --- 启动计时器线程 ---
+        stop_event = threading.Event()
+        timer_thread = threading.Thread(target=loading_timer, args=(stop_event,))
+        timer_thread.start()
 
         # 计算最优解
         solution_result = solver.solve_optimization(required_exp, blocks)
+
+        # --- 停止计时器线程 ---
+        stop_event.set()
+        timer_thread.join()
 
         # 显示解决方案
         used_items = ui.display_solution(required_exp, blocks, descriptions, solution_result)
