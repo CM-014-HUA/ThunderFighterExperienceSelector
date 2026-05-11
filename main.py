@@ -13,8 +13,16 @@ def loading_timer(stop_event):
     start_time = time.time()
     while not stop_event.is_set():
         elapsed = time.time() - start_time
+        elapsed_ms = int(elapsed * 1000)
+        if elapsed >= 1.0:
+            seconds = int(elapsed)
+            ms = elapsed_ms % 1000
+            time_str = f"{seconds} s {ms} ms"
+        else:
+            time_str = f"{elapsed_ms} ms"
         # 使用 \r (回车符) 让光标回到行首覆盖输出，实现同一行刷新
-        sys.stdout.write(f"\r正在优化解决方案... 已耗时: {elapsed:.1f} 秒")
+        # sys.stdout.write(f"\r正在优化解决方案... 已耗时: {elapsed:.1f} 秒")
+        sys.stdout.write(f"\r正在思考... 已耗时: {time_str}")
         sys.stdout.flush()
         time.sleep(1)
     # 计算完成后，清除当前行，为 UI 类的输出腾出干净空间
